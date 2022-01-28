@@ -12,7 +12,7 @@ public class Server {
 
     private static DatagramSocket serverSocket = null;
     private static Worker[] workers;
-    private static QueueLinkedList requestQueue;
+    private static Queue requestQueue;
     private static Map<MyFile, FileMonitor> monitor = new HashMap<>();
 
     public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class Server {
         int port = DEFAULT_PORT;
         DatagramPacket dp = null;
         workers = new Worker[5];
-        requestQueue = new QueueLinkedList();
+        requestQueue = new Queue();
 
         if (args.length > 1) {
 

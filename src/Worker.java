@@ -1,16 +1,15 @@
 import java.net.*;
-import java.io.*;
 import java.util.*;
 
 public class Worker extends Thread {
 
     private DatagramSocket socket;
-    private QueueLinkedList q;
+    private Queue q;
     private int id;
     Map<MyFile, FileMonitor> monitor;
     private String path;
 
-    public Worker (int id, DatagramSocket socket, QueueLinkedList q, Map<MyFile, FileMonitor> monitor, String path) {
+    public Worker (int id, DatagramSocket socket, Queue q, Map<MyFile, FileMonitor> monitor, String path) {
         this.id = id;
         this.socket = socket;
         this.q = q;

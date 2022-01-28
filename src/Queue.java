@@ -1,58 +1,31 @@
 import java.net.*;
 import java.io.*;
+import java.util.*;
 
 public class Queue {
 
-    private DatagramPacket[] puffer;
-    private int ctr = 0;
-    private int nextFree = 0;
-    private int nextFull = 0;
+    private LinkedList<DatagramPacket> queue = new LinkedList<>();
 
-    public Queue (int size) {
-        puffer = new DatagramPacket[size];
-    }
+    public synchronized void add (DatagramPacket packet) {
 
-    public synchronized void add (DatagramPacket dp) {
-
-        try {
-
-            while (ctr == puffer.length) {
-
-                System.err.println("ATTENTION: The puffer of the dispatcher is full!");
-                wait();
-            }
-
-            puffer[nextFree] = dp;
-            nextFree = (nextFree + 1) % puffer.length;
-            ctr++;
-            notifyAll();
-
-        } catch (Exception e) {
-            System.err.println("ERROR: " + e);
-        }
+        queue.add(packet);
+        System.out.println("ATTENTION: Dispatcher added an element to queue. Size of queue: " + queue.size());
+        notifyAll();
     }
 
     public synchronized DatagramPacket remove () {
 
-        DatagramPacket dp = null;
-
         try {
-
-            while (ctr == 0) {
-
-                System.err.println("ATTENTION: The puffer of the dispatcher is empty!");
+            while (queue.isEmpty()) {
                 wait();
             }
 
-            dp = puffer[nextFull];
-            nextFull = (nextFree + 1) % puffer.length;
-            ctr--;
-            notifyAll();
-
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
             System.err.println("ERROR: " + e);
         }
 
-        return dp;
+        System.out.println("ATTENTION: Removing an element from queue. The new size of queue is: " + (queue.size() - 1));
+
+        return queue.pop();
     }
 }
