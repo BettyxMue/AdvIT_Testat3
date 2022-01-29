@@ -1,0 +1,10 @@
+Hallöchen,
+ich bin
+eine Testdatei!
+Mit mir
+kannst Du die
+Lesen- und
+Schreiboperation
+testen!
+Viel Spaß dabei!
+:)
