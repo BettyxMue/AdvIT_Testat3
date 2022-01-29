@@ -21,20 +21,18 @@ public class MyFile extends File {
         fm = monitor.get(file);
 
         if (fm == null) {
-            return "FILE NOT FOUND";
+            return "ERROR: The corresponding file could not be found!";
         }
 
         fm.startRead();
 
-        System.out.println("SUCCESS: Worker " + id + " is reading...");
-
-        String answer = "ERROR: unable to open file for reading";
+        String answer = "ERROR: unable to open file for reading!";
         BufferedReader bf = null;
 
         try {
 
             bf = new BufferedReader(new FileReader(fileName + ".txt"));
-            String s = "ERROR: READ failed - line could not be found in file";
+            String s = "ERROR: READ failed - line + " + lineNo + " could not be found in file!";
 
             for (int i = 0; (i < lineNo) && (s != null); i++) {
                 s = bf.readLine();
@@ -69,12 +67,12 @@ public class MyFile extends File {
         fm = monitor.get(file);
 
         if (fm == null) {
-            return "FILE NOT FOUND";
+            return "ERROR: The corresponding file could not be found!";
         }
 
         fm.startWrite();
 
-        String answer = "ERROR: unable to open file for writing";
+        String answer = "ERROR: unable to open file for writing!";
         BufferedReader inFile = null;
         PrintWriter outFile = null;
         boolean found = false;
@@ -84,7 +82,7 @@ public class MyFile extends File {
             inFile = new BufferedReader(new FileReader(fileName));
             outFile = new PrintWriter(new FileWriter(fileName + ".temp"));
 
-            answer = "ERROR; WRITE failed - line could not be found in file.";
+            answer = "ERROR; WRITE failed - line " + lineNo + " could not be found in file!";
             String s = "";
 
             for (int i = 0; s != null; i++) {

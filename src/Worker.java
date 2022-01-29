@@ -19,12 +19,12 @@ public class Worker extends Thread {
 
     public void run () {
 
-        System.out.println("WORKER " + this.id + " arbeitet...");
+        System.out.println("ATTENTION: Worker " + this.id + " is running...");
 
         while (Server.running) {
 
             DatagramPacket dp = q.remove();
-            System.out.println("Worker " + this.id + " hat Job bekommen!");
+            System.out.println("SUCCESS: Worker " + this.id + " received the job from the queue!");
 
             try {
 
@@ -58,7 +58,7 @@ public class Worker extends Thread {
         // Wird kein Befehl auf Grund von "EXIT" übergeben, würde er sonst beim Aufrufen von "split" in einen Fehler
         // laufen. Durch vorherige Überprüfung soll dies vermieden werden.
         if (command == null) {
-            return "FAILED: Something failed on the client-side. Closing the server...";
+            return "FAILED: Something failed on the client-side.";
         }
 
         try {
@@ -87,10 +87,12 @@ public class Worker extends Thread {
 
                     sleep(5000);
 
+                    System.out.println("ATTENTION: Worker " + this.id + " starts reading...");
                     answer = f.read(id, f, lineNo, monitor);
+                    System.out.println("ATTENTION: Worker " + this.id + " stops reading...");
 
                 } catch (Exception e) {
-                    answer = "ERROR: bad READ command";
+                    answer = "ERROR: Something went wrong with the READ command!";
                     throw new Exception(e);
                 }
 
@@ -118,19 +120,17 @@ public class Worker extends Thread {
 
                     sleep(5000);
 
-                    System.out.println("Worker " + this.id + " fängt an zu schreiben...");
-
+                    System.out.println("ATTENTION: Worker " + this.id + " starts writing...");
                     answer = f.write(id, f, lineNo, newData, monitor);
-
-                    System.out.println("Worker " + this.id + " hört auf zu schreiben...");
+                    System.out.println("ATTENTION: Worker " + this.id + " stops writing...");
 
                 } catch (Exception e) {
-                    answer = "ERROR: bad WRITE command";
+                    answer = "ERROR: Something went wrong with the WRITE command!";
                     throw new Exception(e);
                 }
 
             } else {
-                answer = "ERROR: unknown command";
+                answer = "ERROR: The given command is unknown!";
                 throw new Exception("Unknown Command");
             }
 

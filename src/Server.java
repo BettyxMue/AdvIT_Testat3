@@ -48,9 +48,9 @@ public class Server {
             }
 
             for(int i = 0; i < workers.length; i++) {
-                workers[i] = new Worker(i, serverSocket, requestQueue, monitor, PATH);
+                workers[i] = new Worker(i + 1, serverSocket, requestQueue, monitor, PATH);
                 workers[i].start();
-                System.out.println("SUCCESS: Worker "+ i +" was started!");
+                System.out.println("SUCCESS: Worker "+ (i + 1) +" was started!");
             }
 
             while (true) {
