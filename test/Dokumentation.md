@@ -77,12 +77,22 @@ Type a command to send:
 ### Beispiel 1: Paralleles Lesen aus einer Datei
 
 
-Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+Client 1: Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
 ```java
 
 ```
 
-Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+Client 1: Die Ausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Client 2: Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Client 2: Die Ausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
 
 ```
@@ -95,12 +105,22 @@ Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
 ### Beispiel 2: Paralleles Lesen aus mehreren Dateien
 
 
-Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+Client 1: Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
 ```java
 
 ```
 
-Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+Client 1: Die Ausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Client 2: Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Client 2: Die Ausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
 
 ```
@@ -113,12 +133,22 @@ Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
 ### Beispiel 3: Paralleles Schreiben in eine Datei
 
 
-Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+Client 1: Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
 ```java
 
 ```
 
-Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+Client 1: Die Ausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Client 2: Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Client 2: Die Ausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
 
 ```
@@ -131,12 +161,22 @@ Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
 ### Beispiel 4: Paralleles Schreiben in mehrere Dateien
 
 
-Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+Client 1: Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
 ```java
 
 ```
 
-Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+Client 1: Die Ausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Client 2: Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Client 2: Die Ausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
 
 ```
@@ -149,12 +189,22 @@ Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
 ### Beispiel 5: Paralleles Lesen und Schreiben in eine Datei
 
 
-Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+Client 1: Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
 ```java
 
 ```
 
-Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+Client 1: Die Ausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Client 2: Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Client 2: Die Ausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
 
 ```
@@ -167,12 +217,22 @@ Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
 ### Beispiel 6: Paralleles Lesen und Schreiben in mehrere Dateien
 
 
-Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+Client 1: Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
 ```java
 
 ```
 
-Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+Client 1: Die Ausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Client 2: Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Client 2: Die Ausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
 
 ```
