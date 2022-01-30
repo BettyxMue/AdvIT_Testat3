@@ -11,6 +11,11 @@ vorausgesetzt. Der automatische Client funktioniert auch ohne diese, wird jedoch
 zurückgeben, da die automatisch erstellten Dateien leer sind, solange sie nicht durch die entsprechenden Kommandos 
 beschrieben worden sind.
 
+### Client.java
+
+
+## Beispiele
+
 **test1.txt**
 ```java
 Hello!
@@ -37,10 +42,30 @@ Lorem Ipsum
 Lorem Ipsum
 ```
 
-### Client.java
+Alle folgenden Beispiele finden mittels **Client-Modus 2** statt:
+```java
+Available mode:
+1 - manual user input
+2 - prepared automatic input
+Please choose one of the modes above:
+> 2
 
+```
 
-## Beispiele
+Dabei wurde der Server entsprechend der folgenden Ausgabe gestartet:
+```java
+SUCCESS: Server was startet on port 5999!
+SUCCESS: Worker 1 was started!
+ATTENTION: Worker 1 is running...
+SUCCESS: Worker 2 was started!
+SUCCESS: Worker 3 was started!
+ATTENTION: Worker 2 is running...
+ATTENTION: Worker 3 is running...
+SUCCESS: Worker 4 was started!
+SUCCESS: Worker 5 was started!
+ATTENTION: Worker 4 is running...
+ATTENTION: Worker 5 is running...
+```
 
 ### Beispiel 1: Paralleles Lesen aus der gleichen Datei
 
