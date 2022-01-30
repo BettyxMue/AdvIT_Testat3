@@ -20,8 +20,400 @@ und
 ```java
 if (s == null || s.equalsIgnoreCase("EXIT"))
 ```
-wird diese Funktionalität jedoch wie auch in der vergangenen Testataufgabe unterstützt.
+wird diese Funktionalität jedoch wie auch in der vergangenen Testataufgabe unterstützt. Auch die Eingaben der Dateinamen
+sind nicht von Groß- und Kleinschreibung abhängig, sofern eine Datei nicht neu erstellt werden muss, um in diese 
+schreiben zu können. Existiert die zu beschreibende Datei noch nicht, so wird eine mit der entsprechenden Groß- und 
+Kleinschreibung, wie im Befehl angegeben, angelegt. Der Zugriff erfolgt jedoch "non case sensitive". Auf der anderen 
+Seite erfolgt das Schreiben der Daten in eine Datei immer "case sensitive".
 
 
+
+Für das Durchspielen der verschiedenen Beispiele werden folgende Dateien mit dem entsprechenden Inhalt vorausgesetzt:
+
+**Speiseplan.txt**
+```java
+Montag: Sushi
+Dienstag: Burger
+Mittwoch: Porridge
+Donnerstag: Brot und Aufschnitt
+Freitag: Suppe
+Samstag: Käsekuchen
+Sonntag: Braten
+```
+
+**Zahlen.txt**
+```java
+Null
+Eins
+Zwei
+Drei
+Vier
+Fünf
+Sechs
+Sieben
+Acht
+Neun
+Zehn
+Doppel Eins
+...
+```
+
+Für individuelle Testfälle können aber natürlich auch andere Textdateien über _das Programm_ oder _manuell_ angelegt werden.
+
+Alle folgenden Beispiele finden mittels **Client-Modus 1** statt:
+```java
+Available mode:
+1 - manual user input
+2 - prepared automatic input
+Please choose one of the modes above:
+> 1
+*************************************************************************************
+ATTENTION: You have chosen mode 1!
+Type a command to send:
+'READ file, lineNO' OR 'WRITE file, lineNo, data' OR 'EXIT'
+> 
+```
+
+### Beispiel 1: Paralleles Lesen aus einer Datei
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 2: Paralleles Lesen aus mehreren Dateien
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 3: Paralleles Schreiben in eine Datei
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 4: Paralleles Schreiben in mehrere Dateien
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 5: Paralleles Lesen und Schreiben in eine Datei
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 6: Paralleles Lesen und Schreiben in mehrere Dateien
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 7: Lesen aus einer nicht vorhandenen Datei
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 8: Schreiben in eine nicht vorhandene Datei
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 9: Lesen einer nicht vorhandenen Zeile
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 10: Beschreiben einer nicht vorhandene Zeile
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 11: Überschreiben einer bereits vorhandenen Zeile
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 12: Unvollständiger Lese-Befehl
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 13: Unvollständiger Schreib-Befehl
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 14: Unzulässiger Lese-Befehl
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 15: Unzulässiger Schreib-Befehl
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 16: Lesen einer negativen Zeilennummer
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 17: Beschreiben einer negativen Zeilennummer
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 18: Unbekannter Befehl
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 19: Befehl ohne gestarteten Server
+
+
+Die Benutzereingabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
 
 ## Auswertung
+Da für diese Testataufgabe viele Testfälle gefunden werden können, erlaube ich es mir nur eine Gesamtauswertung zu 
+verfassen. Sollte natürlich genauere Erklärungen nötig sein, so sind diese im entsprechenden Beispiel vermerkt oder 
+in der Code-Dokumentation findbar.
+
+
