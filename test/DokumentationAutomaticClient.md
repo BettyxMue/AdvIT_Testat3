@@ -11,6 +11,32 @@ vorausgesetzt. Der automatische Client funktioniert auch ohne diese, wird jedoch
 zurückgeben, da die automatisch erstellten Dateien leer sind, solange sie nicht durch die entsprechenden Kommandos 
 beschrieben worden sind.
 
+**test1.txt**
+```java
+Hello!
+I am a
+test
+file.
+Nice to
+meet you!
+
+
+
+Lovely weather today,
+isn't it? :)
+
+...
+```
+
+**test2.txt**
+```java
+Lorem Ipsum
+Lorem Ipsum
+Lorem Ipsum
+Lorem Ipsum
+Lorem Ipsum
+```
+
 ### Client.java
 
 

@@ -58,7 +58,7 @@ Doppel Eins
 ...
 ```
 
-Für individuelle Testfälle können aber natürlich auch andere Textdateien über _das Programm_ oder _manuell_ angelegt werden.
+Diese können im Ordner "_Test Files_" gefunden werden. Für individuelle Testfälle können aber natürlich auch andere Textdateien über _das Programm_ oder _manuell_ angelegt werden.
 
 Alle folgenden Beispiele finden mittels **Client-Modus 1** statt:
 ```java
