@@ -74,6 +74,21 @@ Type a command to send:
 > 
 ```
 
+Dabei wurde der Server entsprechend der folgenden Ausgabe gestartet:
+```java
+SUCCESS: Server was startet on port 5999!
+SUCCESS: Worker 1 was started!
+ATTENTION: Worker 1 is running...
+SUCCESS: Worker 2 was started!
+SUCCESS: Worker 3 was started!
+ATTENTION: Worker 2 is running...
+ATTENTION: Worker 3 is running...
+SUCCESS: Worker 4 was started!
+SUCCESS: Worker 5 was started!
+ATTENTION: Worker 4 is running...
+ATTENTION: Worker 5 is running...
+```
+
 ### Beispiel 1: Paralleles Lesen aus einer Datei
 
 
