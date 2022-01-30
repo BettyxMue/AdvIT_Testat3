@@ -1,6 +1,7 @@
 import java.net.*;
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.TimeoutException;
 
 public class Client {
 
@@ -98,17 +99,29 @@ public class Client {
                             // Senden des DPs
                             socket.send(outPacket);
 
-                            // Initialisierung eines Byte-Arrays mit der max. Größe eines DPs
-                            byte[] buffer = new byte[MAXSIZE];
-                            // Speicherung des Antwort-DPs
-                            DatagramPacket inPacket = new DatagramPacket(buffer, buffer.length);
-                            // Empfangen des Antwort-DPs
-                            socket.receive(inPacket);
+                            // setze den Timeout des Clients auf 5 Minuten
+                            socket.setSoTimeout(300000);
 
-                            // Ausgabe der Antwort für den Benutzer
-                            String answer = new String(inPacket.getData(), 0, inPacket.getLength());
-                            System.out.println("SUCCESS: Answer received: <" + answer + ">");
-                            System.out.println("*************************************************************************************");
+                            try {
+                                // Initialisierung eines Byte-Arrays mit der max. Größe eines DPs
+                                byte[] buffer = new byte[MAXSIZE];
+                                // Speicherung des Antwort-DPs
+                                DatagramPacket inPacket = new DatagramPacket(buffer, buffer.length);
+                                // Empfangen des Antwort-DPs
+                                socket.receive(inPacket);
+
+                                // Ausgabe der Antwort für den Benutzer
+                                String answer = new String(inPacket.getData(), 0, inPacket.getLength());
+                                System.out.println("SUCCESS: Answer received: <" + answer + ">");
+                                System.out.println("*************************************************************************************");
+
+                            } catch (SocketTimeoutException e) {
+                                // erhält Client nach 5 Minuten keine Antwort vom Server: Fehlerausgabe + Beenden des
+                                // clients
+                                System.err.println("ERROR: " + e + "\nNo connection to server available. The client " +
+                                        "will be closed now...");
+                                System.exit(1);
+                            }
                         }
 
                         // wird mittels "exit" oder null aus der While-Schleife ausgebrochen, so wird im Folgenden noch
