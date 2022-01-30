@@ -118,23 +118,29 @@ public class Worker extends Thread {
                             fileName = param2[0].trim();
                             // Speicherung der Zeilennummer durch Split des Befehls
                             lineNo = Integer.parseInt(param2[1].trim());
-                            // Erstellung eines Files mit eingegebenen Namen und vorgegebenen Pfad
-                            f = new MyFile(path, fileName);
 
-                            // Überprüfung, ob für die entsprechende Datei ein Monitor bereits zugewiesen ist
-                            if (!monitor.containsKey(f)) {
-                                // wenn nicht, wird ein Monitor für diese Datei erstellt
-                                currentMonitor = new FileMonitor();
-                                monitor.put(f, currentMonitor);
+                            if (lineNo < 1){
+                                answer = "ERROR: Bad line number input. Please choose a line number greater than 0.";
+
+                            } else {
+                                // Erstellung eines Files mit eingegebenen Namen und vorgegebenen Pfad
+                                f = new MyFile(path, fileName);
+
+                                // Überprüfung, ob für die entsprechende Datei ein Monitor bereits zugewiesen ist
+                                if (!monitor.containsKey(f)) {
+                                    // wenn nicht, wird ein Monitor für diese Datei erstellt
+                                    currentMonitor = new FileMonitor();
+                                    monitor.put(f, currentMonitor);
+                                }
+
+                                // lege den Thread schlafen, um Parallelität zeigen zu können
+                                sleep(5000);
+
+                                System.out.println("ATTENTION: Worker " + this.id + " starts reading...");
+                                // Lesen des Inhalts der angefragten Zeile aus der entsprechenden Datei
+                                answer = f.read(f, lineNo, monitor);
+                                System.out.println("ATTENTION: Worker " + this.id + " stops reading...");
                             }
-
-                            // lege den Thread schlafen, um Parallelität zeigen zu können
-                            sleep(5000);
-
-                            System.out.println("ATTENTION: Worker " + this.id + " starts reading...");
-                            // Lesen des Inhalts der angefragten Zeile aus der entsprechenden Datei
-                            answer = f.read(f, lineNo, monitor);
-                            System.out.println("ATTENTION: Worker " + this.id + " stops reading...");
 
                         } else {
                             // Fehlermeldung, wenn der Benutzer keinen Dateinamen eingegeben hat
@@ -171,33 +177,39 @@ public class Worker extends Thread {
                             fileName = param2[0].trim();
                             // Speicherung der Zeilennummer durch Split des Befehls
                             lineNo = Integer.parseInt(param2[1].trim());
-                            // Speicherung des neuen Inhalts durch Split des Befehls
-                            newData = param2[2].trim();
-                            // Erstellung eines Files mit eingegebenen Namen und vorgegebenen Pfad
-                            f = new MyFile(path, fileName + ".txt");
 
-                            // Überprüfung, ob im angegebenen Pfad bereits eine Datei entsprechend des Datei-Objekts
-                            // existiert
-                            if (!f.exists()) {
-                                // wenn nicht, wird sie erstellt
-                                f.createNewFile();
-                                System.out.println("ATTENTION: No corresponding file could be found! Creating one...");
+                            if (lineNo < 1){
+                                answer = "ERROR: Bad line number input. Please choose a line number greater than 0.";
+
+                            } else {
+                                // Speicherung des neuen Inhalts durch Split des Befehls
+                                newData = param2[2].trim();
+                                // Erstellung eines Files mit eingegebenen Namen und vorgegebenen Pfad
+                                f = new MyFile(path, fileName + ".txt");
+
+                                // Überprüfung, ob im angegebenen Pfad bereits eine Datei entsprechend des Datei-Objekts
+                                // existiert
+                                if (!f.exists()) {
+                                    // wenn nicht, wird sie erstellt
+                                    f.createNewFile();
+                                    System.out.println("ATTENTION: No corresponding file could be found! Creating one...");
+                                }
+
+                                // Überprüfung, ob für die entsprechende Datei ein Monitor bereits zugewiesen ist
+                                if (!monitor.containsKey(f)) {
+                                    // wenn nicht, wird ein Monitor für diese Datei erstellt
+                                    currentMonitor = new FileMonitor();
+                                    monitor.put(f, currentMonitor);
+                                }
+
+                                // lege den Thread schlafen, um Parallelität zeigen zu können
+                                sleep(5000);
+
+                                System.out.println("ATTENTION: Worker " + this.id + " starts writing...");
+                                // Schreiben der eingegebenen Daten in die angegebenen Zeile der entsprechenden Datei
+                                answer = f.write(f, lineNo, newData, monitor);
+                                System.out.println("ATTENTION: Worker " + this.id + " stops writing...");
                             }
-
-                            // Überprüfung, ob für die entsprechende Datei ein Monitor bereits zugewiesen ist
-                            if (!monitor.containsKey(f)) {
-                                // wenn nicht, wird ein Monitor für diese Datei erstellt
-                                currentMonitor = new FileMonitor();
-                                monitor.put(f, currentMonitor);
-                            }
-
-                            // lege den Thread schlafen, um Parallelität zeigen zu können
-                            sleep(5000);
-
-                            System.out.println("ATTENTION: Worker " + this.id + " starts writing...");
-                            // Schreiben der eingegebenen Daten in die angegebenen Zeile der entsprechenden Datei
-                            answer = f.write(f, lineNo, newData, monitor);
-                            System.out.println("ATTENTION: Worker " + this.id + " stops writing...");
 
                         } else {
                             // Fehlermeldung, wenn der Benutzer keinen Dateinamen eingegeben hat

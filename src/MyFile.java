@@ -67,7 +67,11 @@ public class MyFile extends File {
             // bei Auftreten einer FileNotFoundException: Fehlerausgabe
             return "ERROR: The corresponding file does not exists!";
 
-        }catch (Exception e) {
+        } catch (IOException e) {
+            // bei Auftreten einer IOException: Fehlerausgabe
+            System.err.println("ERROR: " + e);
+
+        } catch (Exception e) {
             // bei Auftreten einer Exception: Fehlerausgabe
             System.err.println("ERROR: " + e);
         }
@@ -144,6 +148,14 @@ public class MyFile extends File {
                     outFile.println(s);
                 }
             }
+
+        } catch (FileNotFoundException e) {
+            // bei Auftreten einer FileNotFoundException: Fehlerausgabe
+            return "ERROR: The corresponding file does not exists!";
+
+        } catch (IOException e) {
+            // bei Auftreten einer IOException: Fehlerausgabe
+            System.err.println("ERROR: " + e);
 
         } catch (Exception e) {
             // bei Auftreten einer Exception: Fehlerausgabe

@@ -97,7 +97,6 @@ public class Server {
                     System.exit(1);
                 }
             }
-
         } catch (Exception e) {
             // bei Auftreten einer Exception: Fehlerausgabe und Beenden des Programms
             System.err.println("ERROR: " + e + "\nCould not initialize the server! Exiting program...");

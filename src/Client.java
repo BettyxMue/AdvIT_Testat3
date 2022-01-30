@@ -182,6 +182,18 @@ public class Client {
                     "will be closed now...");
             System.exit(1);
 
+        } catch (SocketException e) {
+            // bei Auftreten einer SocketException: Fehlerausgabe
+            System.err.println("ERROR: " + e);
+
+        } catch (UnknownHostException e) {
+            // bei Auftreten einer UnknownHostException: Fehlerausgabe
+            System.err.println("ERROR: " + e);
+
+        } catch (IOException e) {
+            // bei Auftreten einer IOException: Fehlerausgabe
+            System.err.println("ERROR: " + e);
+
         } catch (Exception e) {
             // bei Auftreten einer Exception: Fehlerausgabe
             System.err.println("ERROR: " + e);
