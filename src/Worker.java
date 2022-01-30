@@ -121,7 +121,8 @@ public class Worker extends Thread {
                                 // Speicherung der Zeilennummer durch Split des Befehls
                                 lineNo = Integer.parseInt(param2[1].trim());
 
-                                if (lineNo < 1){
+                                // Überprüfung, ob eine positive Zahl < 0 als Zeilennummer angegeben wurde
+                                if (lineNo < 0){
                                     answer = "ERROR: Bad line number input. Please choose a line number greater than 0.";
 
                                 } else {
@@ -145,9 +146,11 @@ public class Worker extends Thread {
                                 }
 
                             } catch (InterruptedException e) {
+                                // automatische Fehlermeldung für thread.sleep()
                                 throw new Exception(e);
 
                             } catch (IllegalArgumentException e) {
+                                // Fehlermeldung, wenn der Benutzer keine Zahl als Zeilennummer angibt
                                 answer = "ERROR: Bad line number input. Line number has to be an integer number greater than 0.";
                             }
 
@@ -188,7 +191,8 @@ public class Worker extends Thread {
                                 // Speicherung der Zeilennummer durch Split des Befehls
                                 lineNo = Integer.parseInt(param2[1].trim());
 
-                                if (lineNo < 1) {
+                                // Überprüfung, ob eine positive Zahl < 0 als Zeilennummer angegeben wurde
+                                if (lineNo < 0){
                                     answer = "ERROR: Bad line number input. Please choose a line number greater than 0.";
 
                                 } else {
@@ -222,9 +226,11 @@ public class Worker extends Thread {
                                 }
 
                             } catch (InterruptedException e) {
+                                // automatische Fehlermeldung für thread.sleep()
                                 throw new Exception(e);
 
                             } catch (IllegalArgumentException e) {
+                                // Fehlermeldung, wenn der Benutzer keine Zahl als Zeilennummer angibt
                                 answer = "ERROR: Bad line number input. Line number has to be an integer number greater than 0.";
                             }
 

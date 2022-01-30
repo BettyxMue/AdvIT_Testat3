@@ -11,6 +11,7 @@ public class Client {
     public final static String HOSTNAME = "localhost";
     public static DatagramSocket socket;
     public static InetAddress host;
+    public static final int timeout = 300000;
 
     /**
      * Diese Methode holt den Benutzer-Input in Bezug auf den ausgewählten Client-Modi.
@@ -73,7 +74,7 @@ public class Client {
                         // Dauerschleife zum Einlesen der Benutzer-Eingabe
                         while (true) {
 
-                            System.out.println("> ");
+                            System.out.print("> ");
                             // Einlesen der Benutzer-Eingabe
                             s = userIn.readLine();
 
@@ -100,7 +101,7 @@ public class Client {
                             socket.send(outPacket);
 
                             // setze den Timeout des Clients auf 5 Minuten
-                            socket.setSoTimeout(300000);
+                            socket.setSoTimeout(timeout);
 
                             try {
                                 // Initialisierung eines Byte-Arrays mit der max. Größe eines DPs
@@ -119,7 +120,7 @@ public class Client {
                                 // erhält Client nach 5 Minuten keine Antwort vom Server: Fehlerausgabe + Beenden des
                                 // clients
                                 System.err.println("ERROR: " + e + "\nNo connection to server available. The client " +
-                                        "will be closed now...");
+                                        "timed out after " + timeout + "milliseconds and will be closed now...");
                                 System.exit(1);
                             }
                         }
@@ -154,7 +155,7 @@ public class Client {
                     System.out.println("ATTENTION: You have chosen mode 2! The automatic tests will start now...");
 
                     // setze den Timeout des Clients auf 5 Minuten
-                    socket.setSoTimeout(300000);
+                    socket.setSoTimeout(timeout);
 
                     // Start der verschiedenen Testfälle mittels eigener Methoden
                     automaticWriterPriority();
@@ -179,7 +180,7 @@ public class Client {
             // erhält Client nach 5 Minuten keine Antwort vom Server: Fehlerausgabe + Beenden des
             // clients
             System.err.println("ERROR: " + e + "\nNo connection to server available. The client " +
-                    "will be closed now...");
+                    "timed out after " + timeout + "milliseconds and will be closed now...");
             System.exit(1);
 
         } catch (SocketException e) {
