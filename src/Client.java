@@ -17,7 +17,7 @@ public class Client {
      *
      * @Return int
      */
-    public static int getMode () {
+    public static int getMode() {
 
         System.out.println("Available mode:\n1 - manual user input\n2 - prepared automatic input");
         System.out.print("Please choose one of the modes above:\n> ");
@@ -43,7 +43,7 @@ public class Client {
     /**
      * Diese main-Methode dient dem Start der Client-Klasse, um deren verschiedene Prozeduren zu starten.
      *
-     * @param args      - String-Array (mit Argumenten / Parametern) der main-Methode
+     * @param args - String-Array (mit Argumenten / Parametern) der main-Methode
      * @Return void
      */
     public static void main(String[] args) {
@@ -127,11 +127,11 @@ public class Client {
                         // wird mittels "exit" oder null aus der While-Schleife ausgebrochen, so wird im Folgenden noch
                         // überprüft, ob die Streams leer sind
                         try {
-                            if(socket != null) {
+                            if (socket != null) {
                                 // wenn ja, wird der verwendete Socket geschlossen
                                 socket.close();
                             }
-                            if(userIn != null) {
+                            if (userIn != null) {
                                 // wenn ja, wird der Benutzer-Input-Stream geschlossen
                                 userIn.close();
                             }
@@ -153,6 +153,9 @@ public class Client {
                     System.out.println("*************************************************************************************");
                     System.out.println("ATTENTION: You have chosen mode 2! The automatic tests will start now...");
 
+                    // setze den Timeout des Clients auf 5 Minuten
+                    socket.setSoTimeout(300000);
+
                     // Start der verschiedenen Testfälle mittels eigener Methoden
                     automaticWriterPriority();
                     automaticParallelReading();
@@ -171,6 +174,14 @@ public class Client {
                     // ist die Eingabe weder 1 noch 2, so wird eine Exception geworfen
                     throw new Exception("Wrong choice of mode! Please start the client again and choose mode 1 or 2.");
             }
+
+        } catch (SocketTimeoutException e) {
+            // erhält Client nach 5 Minuten keine Antwort vom Server: Fehlerausgabe + Beenden des
+            // clients
+            System.err.println("ERROR: " + e + "\nNo connection to server available. The client " +
+                    "will be closed now...");
+            System.exit(1);
+
         } catch (Exception e) {
             // bei Auftreten einer Exception: Fehlerausgabe
             System.err.println("ERROR: " + e);
@@ -181,14 +192,14 @@ public class Client {
      * Diese Methode ist zuständig, um während der automatische Client läuft, die eingegebenen Befehle entgegenzunehmen,
      * zu senden und auf deren Antwort zu warten, sodass diese korrekt dem Benutzer angezeigt werden.
      *
-     * @param commands  - eine Liste aus mitgegebenen Befehlen des automatischen Clients
+     * @param commands - eine Liste aus mitgegebenen Befehlen des automatischen Clients
      * @Return void
      */
     public static void sendAutomaticCommand(List<String> commands) {
 
         try {
 
-            for(String command: commands) {
+            for (String command : commands) {
 
                 System.out.println("Send: <" + command + ">");
                 // Erstellung eines DPs aus den vordefinierten Befehlen
@@ -198,7 +209,7 @@ public class Client {
                 socket.send(outPacket);
             }
 
-            for(String command: commands) {
+            for (String command : commands) {
 
                 // Erstellung eines DPs für den Empfang der automatischen Antworten
                 byte[] buffer = new byte[MAXSIZE];
@@ -210,7 +221,14 @@ public class Client {
                 System.out.println("SUCCESS: Answer received: <" + answer + ">");
             }
 
-        } catch(Exception e) {
+        } catch (SocketTimeoutException e) {
+            // erhält Client nach 5 Minuten keine Antwort vom Server: Fehlerausgabe + Beenden des
+            // clients
+            System.err.println("ERROR: " + e + "\nNo connection to server available. The client " +
+                    "will be closed now...");
+            System.exit(1);
+
+        } catch (Exception e) {
             // bei Auftreten einer Exception: Fehlerausgabe
             System.err.println("ERROR: " + e);
         }
