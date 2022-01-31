@@ -393,3 +393,49 @@ No connection to server available. The client will be closed now...
 ```
 
 ## Auswertung
+Die passenden Ausgaben bzw. Fehlerausgaben zeigen, dass das Programm mit allen Eventualitäten klarkommt und somit die
+Aufgabe entsprechend der Anforderungen erfüllt wurde. Die Testdateien sollten am Ende des Durchlaufs wie folgt 
+aussehen:
+
+**test1.txt**
+```java
+BYE!
+I am a
+SURPRISE
+file.
+SURPRISE in line 5
+meet you!
+
+
+
+Lovely weather today,
+isn't it? :)
+
+...
+
+
+
+
+
+
+
+
+
+
+
+I am the last line
+```
+
+**test2.txt**
+```java
+HELLO!
+Lorem Ipsum
+Trying to access in parallel...
+Lorem Ipsum
+Random Data in line 5
+
+
+
+
+I am the last line
+```

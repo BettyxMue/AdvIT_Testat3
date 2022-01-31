@@ -574,8 +574,34 @@ No connection to server available. The client timed out after 300000 millisecond
 ```
 
 ## Auswertung
-Da für diese Testataufgabe viele Testfälle gefunden werden können, erlaube ich es mir nur eine Gesamtauswertung zu 
-verfassen. Sollte natürlich genauere Erklärungen nötig sein, so sind diese im entsprechenden Beispiel vermerkt oder 
-in der Code-Dokumentation findbar.
+Die passenden Ausgaben bzw. Fehlerausgaben zeigen, dass das Programm mit allen Eventualitäten klarkommt und somit die
+Aufgabe entsprechend der Anforderungen erfüllt wurde. Die Testdateien sollten am Ende des Durchlaufs wie folgt
+aussehen:
 
+**Speiseplan.txt**
+```java
+Montag: Nix!
+Dienstag: Salat
+Mittwoch: ...mag keinen Salat, will lieber Eis!
+Donnerstag: Brot und Aufschnitt
+Freitag: Suppe
+Samstag: Käsekuchen
+Sonntag: Entenbraten
+```
 
+**Zahlen.txt**
+```java
+Null
+Eins
+Zwei
+Drei
+Vier
+Fünf
+Sechs
+Sieben
+Acht
+Neun
+Zehn
+Doppel Eins
+...
+```

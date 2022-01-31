@@ -136,23 +136,25 @@ public class MyFile extends File {
                 // Setzen die Variable s auf den Inhalt der Zeile
                 s = inFile.readLine();
 
-                //
+                // Überprüfung, ob diese Iteration der Zeilennummer entspricht
                 if (i == lineNo) {
                     // setze die Variable "found" auf true, da die gesuchte Zeile gefunden wurde
                     found = true;
                     // schreibe die eingegebenen Daten des Benutzers in diese Zeile
                     outFile.println(data);
 
-                    // Überprüfung, ob die Variable s nach der Iteration durch die Datei leer ist
                 } else {
-                    // Leere Zeilen mit leerem String füllen (nicht mit s, dann wird "null" reingeschrieben), sonst mit alter Zeile befüllen
+                    //Überprüfung, ob die eingelesene Zeile null ist
                     if (s == null) {
+                        // wenn ja, leere Zeilen mit leerem String füllen (nicht mit s, dann wird "null" reingeschrieben)
                         outFile.println("");
 
                     } else {
+                        // wenn nicht, den Inhalt der alten Zeile wieder übertragen
                         outFile.println(s);
                     }
                 }
+                // Inkrementieren der Zählervariable
                 i++;
             }
 
