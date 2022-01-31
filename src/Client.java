@@ -78,7 +78,7 @@ public class Client {
                             s = userIn.readLine();
 
                             // Überprüfung, ob die Eingabe leer ist oder "exit" eingegeben wurde
-                            if (s == null || s.equalsIgnoreCase("EXIT")) {
+                            if (s.equalsIgnoreCase("EXIT")) {
                                 // wenn ja, wird die Schleife abgebrochen und der Client beendet sich
                                 break;
                             }

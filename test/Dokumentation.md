@@ -18,7 +18,7 @@ else if (piece[0].equalsIgnoreCase("WRITE"))
 ```
 und
 ```java
-if (s == null || s.equalsIgnoreCase("EXIT"))
+if (s.equalsIgnoreCase("EXIT"))
 ```
 wird diese Funktionalität jedoch wie auch in der vergangenen Testataufgabe unterstützt. Auch die Eingaben der Dateinamen
 sind nicht von Groß- und Kleinschreibung abhängig, sofern eine Datei nicht neu erstellt werden muss, um in diese 
