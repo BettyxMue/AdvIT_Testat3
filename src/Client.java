@@ -264,7 +264,7 @@ public class Client {
      */
     public static void automaticReadFromNonExistentFile() {
         System.out.println("*************************************************************************************");
-        System.out.println("ATTENTION: Starting test for reading a non existent line...");
+        System.out.println("ATTENTION: Starting test for reading a non existent file...");
 
         List<String> commands = new ArrayList();
         commands.add("READ test3,50");
