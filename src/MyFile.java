@@ -130,8 +130,8 @@ public class MyFile extends File {
             answer = "ERROR; WRITE failed - line " + lineNo + " could not be found in file!";
             String s = "";
 
-            // Lese alle Zeilen, solange deren Inhalt nicht null wird
-            for (int i = 0; s != null; i++) {
+            // Lese alle Zeilen, bis die gesuchte Zeile erreicht wird
+            for (int i = 0; i < lineNo; i++) {
                 // Setzen die Variable s auf den Inhalt der Zeile
                 s = inFile.readLine();
 

@@ -1,0 +1,7 @@
+Montag: Sushi
+Dienstag: Burger
+Mittwoch: Porridge
+Donnerstag: Brot und Aufschnitt
+Freitag: Suppe
+Samstag: Käsekuchen
+Sonntag: Braten

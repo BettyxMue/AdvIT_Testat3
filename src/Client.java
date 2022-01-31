@@ -120,7 +120,7 @@ public class Client {
                                 // erhält Client nach 5 Minuten keine Antwort vom Server: Fehlerausgabe + Beenden des
                                 // clients
                                 System.err.println("ERROR: " + e + "\nNo connection to server available. The client " +
-                                        "timed out after " + timeout + "milliseconds and will be closed now...");
+                                        "timed out after " + timeout + " milliseconds and will be closed now...");
                                 System.exit(1);
                             }
                         }
@@ -180,7 +180,7 @@ public class Client {
             // erhält Client nach 5 Minuten keine Antwort vom Server: Fehlerausgabe + Beenden des
             // clients
             System.err.println("ERROR: " + e + "\nNo connection to server available. The client " +
-                    "timed out after " + timeout + "milliseconds and will be closed now...");
+                    "timed out after " + timeout + " milliseconds and will be closed now...");
             System.exit(1);
 
         } catch (SocketException e) {

@@ -42,6 +42,9 @@ Lorem Ipsum
 Lorem Ipsum
 ```
 
+Auf die Serverausgabe in diesen Beispielfällen wird verzichtet, da sie repetitiv sind und im Zuge des automatischen 
+Ablaufs der Befehle eher schlecht nachzuvollziehen sind.
+
 Alle folgenden Beispiele finden mittels **Client-Modus 2** statt:
 ```java
 Available mode:
@@ -70,6 +73,7 @@ ATTENTION: Worker 5 is running...
 ### Beispiel 1: Paralleles Lesen aus der gleichen Datei
 
 
+Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
 *************************************************************************************
 ATTENTION: Starting test for reading parallel from a file...
@@ -91,6 +95,8 @@ SUCCESS: Answer received: <I am>
 
 ### Beispiel 2: Paralleles Lesen aus der gleichen Datei
 
+
+Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
 *************************************************************************************
 ATTENTION: Starting test for writing into the same file...
@@ -109,6 +115,8 @@ SUCCESS: Answer received: <New data in line 5>
 
 ### Beispiel 3: Paralleles Lesen aus der gleichen Datei
 
+
+Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
 *************************************************************************************
 ATTENTION: Starting test for writing in different files...
@@ -121,6 +129,8 @@ SUCCESS: Answer received: <New data in line 5>
 
 ### Beispiel 4: Paralleles Lesen aus der gleichen Datei
 
+
+Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
 *************************************************************************************
 ATTENTION: Starting test for Writer Priority...
@@ -141,6 +151,8 @@ SUCCESS: Answer received: <New data in line 5>
 
 ### Beispiel 5: Paralleles Lesen aus der gleichen Datei
 
+
+Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
 *************************************************************************************
 ATTENTION: Starting test for reading parallel from a file and writing into another file...
@@ -155,6 +167,8 @@ SUCCESS: Answer received: <Trying to access in parallel...>
 
 ### Beispiel 6: Paralleles Lesen aus der gleichen Datei
 
+
+Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
 *************************************************************************************
 ATTENTION: Starting test with more requests than worker...
@@ -187,6 +201,8 @@ SUCCESS: Answer received: <ERROR: READ failed - line 12 could not be found in fi
 
 ### Beispiel 7: Paralleles Lesen aus der gleichen Datei
 
+
+Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
 *************************************************************************************
 ATTENTION: Starting test for reading from different files...
@@ -201,6 +217,8 @@ SUCCESS: Answer received: <New data in line 5>
 
 ### Beispiel 8: Paralleles Lesen aus der gleichen Datei
 
+
+Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
 *************************************************************************************
 ATTENTION: Starting test for reading a non existent line...
