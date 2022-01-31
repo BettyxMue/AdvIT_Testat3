@@ -1,7 +1,6 @@
 import java.net.*;
 import java.io.*;
 import java.util.*;
-import java.util.concurrent.TimeoutException;
 
 public class Client {
 
@@ -30,7 +29,7 @@ public class Client {
         try {
             // Einlesen der Benutzer-Eingabe
             line = modeIn.readLine();
-            // Umwandlung der Benutzer-Eingabe in eine Integer
+            // Umwandlung der Benutzer-Eingabe in ein Integer
             mode = Integer.parseInt(line.trim());
 
         } catch (IOException e) {
@@ -158,14 +157,25 @@ public class Client {
                     socket.setSoTimeout(timeout);
 
                     // Start der verschiedenen Testfälle mittels eigener Methoden
-                    automaticWriterPriority();
-                    automaticParallelReading();
-                    automaticSequentiellWritingInSameDocument();
+                    automaticParallelReadingFromSameFile();
+                    automaticParallelReadFromDifferentFiles();
+                    automaticParallelWritingInSameDocument();
                     automaticParallelWritingInDifferentDocument();
-                    automaticReadParallelAndWriteInDifferentFiles();
-                    automaticMoreRequestsThanWorker();
+                    automaticParallelReadingAndWritingInSameDocument();
+                    automaticParallelReadAndWriteInDifferentFiles();
+                    automaticReadFromNonExistentFile();
+                    automaticWriteInNonExistentFile();
                     automaticReadNonExistentLine();
-                    automaticReadFromDifferentFiles();
+                    automaticWriteNonExistentLine();
+                    automaticOverwriteExistingLine();
+                    automaticIncompleteReadCommand();
+                    automaticIncompleteWriteCommand();
+                    automaticImproperReadCommand();
+                    automaticImproperWriteCommand();
+                    automaticReadNegativeLine();
+                    automaticWriteNegativeLine();
+                    automaticUnknownCommand();
+                    automaticMoreRequestsThanWorker();
 
                     System.out.println("*************************************************************************************");
                     System.out.println("SUCCESS: All tests have passed! Exiting the client...");
@@ -217,7 +227,7 @@ public class Client {
                 System.out.println("Send: <" + command + ">");
                 // Erstellung eines DPs aus den vordefinierten Befehlen
                 byte[] buffer = command.getBytes();
-                DatagramPacket outPacket = new DatagramPacket(buffer, buffer.length, host, 5999);
+                DatagramPacket outPacket = new DatagramPacket(buffer, buffer.length, host, DEFAULT_PORT);
                 // Senden dieser Befehle
                 socket.send(outPacket);
             }
@@ -248,20 +258,34 @@ public class Client {
     }
 
     /**
+     * Diese Methode testet, was passiert, wenn der Client aus einer nicht vorhandenen Datei lesen soll.
+     *
+     * @Return void
+     */
+    public static void automaticReadFromNonExistentFile() {
+        System.out.println("*************************************************************************************");
+        System.out.println("ATTENTION: Starting test for reading a non existent line...");
+
+        List<String> commands = new ArrayList();
+        commands.add("READ test3,50");
+        sendAutomaticCommand(commands);
+    }
+
+    /**
      * Diese Methode testet, ob die Schreiber-Priorität eingehalten wird.
      *
      * @Return void
      */
-    public static void automaticWriterPriority() {
+    public static void automaticParallelReadingAndWritingInSameDocument() {
         System.out.println("*************************************************************************************");
-        System.out.println("ATTENTION: Starting test for Writer Priority...");
+        System.out.println("ATTENTION: Starting test for parallel reading and writing in the same document...");
 
         List<String> commands = new ArrayList();
         commands.add("READ test1,2");
-        commands.add("WRITE test1,3,New data 1");
+        commands.add("WRITE test1,3,SURPRISE");
         commands.add("READ test1,3");
         commands.add("READ test1,4");
-        commands.add("WRITE test1,5,New data in line 5");
+        commands.add("WRITE test1,5,SURPRISE in line 5");
         commands.add("READ test1,5");
         sendAutomaticCommand(commands);
     }
@@ -271,16 +295,16 @@ public class Client {
      *
      * @Return void
      */
-    public static void automaticParallelReading() {
+    public static void automaticParallelReadingFromSameFile() {
         System.out.println("*************************************************************************************");
-        System.out.println("ATTENTION: Starting test for reading parallel from a file...");
+        System.out.println("ATTENTION: Starting test for parallel reading from a file...");
 
         List<String> commands = new ArrayList();
+        commands.add("READ test1,1");
         commands.add("READ test1,2");
         commands.add("READ test1,3");
         commands.add("READ test1,4");
         commands.add("READ test1,5");
-
         sendAutomaticCommand(commands);
     }
 
@@ -289,14 +313,13 @@ public class Client {
      *
      * @Return void
      */
-    public static void automaticSequentiellWritingInSameDocument() {
+    public static void automaticParallelWritingInSameDocument() {
         System.out.println("*************************************************************************************");
-        System.out.println("ATTENTION: Starting test for writing into the same file...");
+        System.out.println("ATTENTION: Starting test for parallel writing into the same file...");
 
         List<String> commands = new ArrayList();
-        commands.add("WRITE test1,3,New data 1");
-        commands.add("WRITE test1,5,New data in line 5");
-
+        commands.add("WRITE test1,3,I am tired...");
+        commands.add("WRITE test1,5,Me too...");
         sendAutomaticCommand(commands);
     }
 
@@ -307,11 +330,11 @@ public class Client {
      */
     public static void automaticParallelWritingInDifferentDocument() {
         System.out.println("*************************************************************************************");
-        System.out.println("ATTENTION: Starting test for writing in different files...");
+        System.out.println("ATTENTION: Starting test for parallel writing in different files...");
 
         List<String> commands = new ArrayList();
-        commands.add("WRITE test1,3,New data 1");
-        commands.add("WRITE test2,5,New data in line 5");
+        commands.add("WRITE test1,3,Random Data");
+        commands.add("WRITE test2,5,Random Data in line 5");
         sendAutomaticCommand(commands);
     }
 
@@ -320,12 +343,12 @@ public class Client {
      *
      * @Return void
      */
-    public static void automaticReadFromDifferentFiles() {
+    public static void automaticParallelReadFromDifferentFiles() {
         System.out.println("*************************************************************************************");
         System.out.println("ATTENTION: Starting test for reading from different files...");
 
         List<String> commands = new ArrayList();
-        commands.add("READ test1,2");
+        commands.add("READ test1,1");
         commands.add("READ test2,3");
         commands.add("READ test1,5");
         sendAutomaticCommand(commands);
@@ -337,14 +360,15 @@ public class Client {
      *
      * @Return void
      */
-    public static void automaticReadParallelAndWriteInDifferentFiles() {
+    public static void automaticParallelReadAndWriteInDifferentFiles() {
         System.out.println("*************************************************************************************");
         System.out.println("ATTENTION: Starting test for reading parallel from a file and writing into another file...");
 
         List<String> commands = new ArrayList();
-        commands.add("READ test1,2");
+        commands.add("READ test1,1");
         commands.add("WRITE test2,3,Trying to access in parallel...");
         commands.add("READ test1,5");
+        commands.add("READ test2,3");
         sendAutomaticCommand(commands);
     }
 
@@ -360,6 +384,7 @@ public class Client {
 
         List<String> commands = new ArrayList();
         commands.add("READ test1,50");
+        commands.add("READ test2,30");
         sendAutomaticCommand(commands);
     }
 
@@ -373,6 +398,7 @@ public class Client {
         System.out.println("ATTENTION: Starting test with more requests than worker...");
 
         List<String> commands = new ArrayList();
+        commands.add("READ test1,1");
         commands.add("READ test1,2");
         commands.add("READ test1,3");
         commands.add("READ test1,4");
@@ -385,6 +411,151 @@ public class Client {
         commands.add("READ test1,11");
         commands.add("READ test1,12");
         commands.add("READ test1,13");
+        sendAutomaticCommand(commands);
+    }
+
+    /**
+     * Diese Methode testet, was passiert, wenn der Client versucht in eine noch nicht existierende Datei zu schreiben.
+     *
+     * @return void
+     */
+    public static void automaticWriteInNonExistentFile(){
+        System.out.println("*************************************************************************************");
+        System.out.println("ATTENTION: Starting test for writing in a non existent file...");
+
+        List<String> commands = new ArrayList();
+        commands.add("WRITE test100,1,Will probably work...");
+        sendAutomaticCommand(commands);
+    }
+
+    /**
+     * Diese Methode testet, was passiert, wenn der Client versucht eine noch nicht beschriebene Zeile zu beschreiben.
+     *
+     * @return void
+     */
+    public static void automaticWriteNonExistentLine(){
+        System.out.println("*************************************************************************************");
+        System.out.println("ATTENTION: Starting test for writing in a non existent line...");
+
+        List<String> commands = new ArrayList();
+        commands.add("WRITE test1,25,I am the last line");
+        commands.add("WRITE test2,10,I am the last line");
+        sendAutomaticCommand(commands);
+    }
+
+    /**
+     * Diese Methode testet, was passiert, wenn der Client versucht eine bereits existierende Zeile zu überschreiben.
+     *
+     * @return void
+     */
+    public static void automaticOverwriteExistingLine(){
+        System.out.println("*************************************************************************************");
+        System.out.println("ATTENTION: Starting test to overwrite an already existing line...");
+
+        List<String> commands = new ArrayList();
+        commands.add("WRITE test1,1,BYE!");
+        commands.add("WRITE test2,1,HELLO!");
+        sendAutomaticCommand(commands);
+    }
+
+    /**
+     * Diese Methode testet, was passiert, wenn der Client einen unvollständigen Lese-Befehl erhält.
+     *
+     * @return void
+     */
+    public static void automaticIncompleteReadCommand(){
+        System.out.println("*************************************************************************************");
+        System.out.println("ATTENTION: Starting test with incomplete read command...");
+
+        List<String> commands = new ArrayList();
+        commands.add("READ ,1");
+        sendAutomaticCommand(commands);
+    }
+
+    /**
+     * Diese Methode testet, was passiert, wenn der Client einen unvollständigen Schreib-Befehl erhält.
+     *
+     * @return void
+     */
+    public static void automaticIncompleteWriteCommand(){
+        System.out.println("*************************************************************************************");
+        System.out.println("ATTENTION: Starting test with incomplete write command...");
+
+        List<String> commands = new ArrayList();
+        commands.add("WRITE ,5,TEST");
+        sendAutomaticCommand(commands);
+    }
+
+    /**
+     * Diese Methode testet, was passiert, wenn der Client einen unzureichenden Lese-Befehl erhält.
+     *
+     * @return void
+     */
+    public static void automaticImproperReadCommand(){
+        System.out.println("*************************************************************************************");
+        System.out.println("ATTENTION: Starting test with improper read command...");
+
+        List<String> commands = new ArrayList();
+        commands.add("READ test1, ");
+        sendAutomaticCommand(commands);
+    }
+
+    /**
+     * Diese Methode testet, was passiert, wenn der Client einen unzureichenden Schreib-Befehl erhält.
+     *
+     * @return void
+     */
+    public static void automaticImproperWriteCommand(){
+        System.out.println("*************************************************************************************");
+        System.out.println("ATTENTION: Starting test with improper write command...");
+
+        List<String> commands = new ArrayList();
+        commands.add("WRITE test2, ,TEST2");
+        sendAutomaticCommand(commands);
+    }
+
+    /**
+     * Diese Methode testet, was passiert, wenn der Client einen Lese-Befehl mit einer negativen Zeilenangabe erhält.
+     *
+     * @return void
+     */
+    public static void automaticReadNegativeLine(){
+        System.out.println("*************************************************************************************");
+        System.out.println("ATTENTION: Starting test to read a negative line number...");
+
+        List<String> commands = new ArrayList();
+        commands.add("READ test1,-1");
+        commands.add("READ test2,-100");
+        sendAutomaticCommand(commands);
+    }
+
+    /**
+     * Diese Methode testet, was passiert, wenn der Client einen Schreib-Befehl mit einer negativen Zeilenangabe
+     * erhält.
+     *
+     * @return void
+     */
+    public static void automaticWriteNegativeLine(){
+        System.out.println("*************************************************************************************");
+        System.out.println("ATTENTION: Starting test to write in a negative line number...");
+
+        List<String> commands = new ArrayList();
+        commands.add("WRITE test1,-10,Will not work...");
+        commands.add("WRITE test2,-5,Will not work either...");
+        sendAutomaticCommand(commands);
+    }
+
+    /**
+     * Diese Methode testet, was passiert, wenn der Client einen unbekannten Befehl erhält.
+     *
+     * @return void
+     */
+    public static void automaticUnknownCommand(){
+        System.out.println("*************************************************************************************");
+        System.out.println("ATTENTION: Starting test with unknown command...");
+
+        List<String> commands = new ArrayList();
+        commands.add("Go to sleep already!");
         sendAutomaticCommand(commands);
     }
 }

@@ -272,8 +272,6 @@ ATTENTION: Worker 5 starts reading...
 ATTENTION: Worker 5 stops reading...
 ```
 
-
-
 ### Beispiel 6: Paralleles Lesen und Schreiben in mehrere Dateien
 
 
@@ -551,7 +549,20 @@ ATTENTION: Removing an element from queue. The new size of queue is: 0
 SUCCESS: Worker 1 received the job from the queue!
 ```
 
-### Beispiel 19: Befehl ohne gestarteten Server
+### Beispiel 19: Mehr Befehle als Worker
+
+
+Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+
+```
+
+### Beispiel 20: Befehl ohne gestarteten Server
 
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:

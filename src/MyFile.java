@@ -129,24 +129,31 @@ public class MyFile extends File {
             // gesetzt --> setzt voraus, dass die gesuchte Zeile gefunden wurde
             answer = "ERROR; WRITE failed - line " + lineNo + " could not be found in file!";
             String s = "";
+            int i = 1;
 
-            // Lese alle Zeilen, bis die gesuchte Zeile erreicht wird
-            for (int i = 0; i < lineNo; i++) {
+            // Lese alle Zeilen, solange deren Inhalt nicht null wird
+            while (i <= lineNo || s != null) {
                 // Setzen die Variable s auf den Inhalt der Zeile
                 s = inFile.readLine();
 
                 //
-                if (i == lineNo - 1) {
+                if (i == lineNo) {
                     // setze die Variable "found" auf true, da die gesuchte Zeile gefunden wurde
                     found = true;
                     // schreibe die eingegebenen Daten des Benutzers in diese Zeile
                     outFile.println(data);
 
-                // Überprüfung, ob die Variable s nach der Iteration durch die Datei leer ist
-                } else if (s != null) {
-                    // wenn nicht, dann schreibe den Inhalt der Variable s wieder in diese Zeile (keine Änderung)
-                    outFile.println(s);
+                    // Überprüfung, ob die Variable s nach der Iteration durch die Datei leer ist
+                } else {
+                    // Leere Zeilen mit leerem String füllen (nicht mit s, dann wird "null" reingeschrieben), sonst mit alter Zeile befüllen
+                    if (s == null) {
+                        outFile.println("");
+
+                    } else {
+                        outFile.println(s);
+                    }
                 }
+                i++;
             }
 
         } catch (FileNotFoundException e) {
@@ -196,7 +203,7 @@ public class MyFile extends File {
                 File f2 = new File(fileName + ".temp");
                 File f3 = new File(fileName + ".bak");
 
-                // Löschen und Umbennung der entsprechenden Dateien, um die Änderungen durchzuführen
+                // Löschen und Umbenennung der entsprechenden Dateien, um die Änderungen durchzuführen
                 f3.delete();
                 f1.renameTo(f3);
                 f2.renameTo(f1);
