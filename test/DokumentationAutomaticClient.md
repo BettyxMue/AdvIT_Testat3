@@ -3,7 +3,7 @@
 Die Aufgabenstellung bleibt entsprechend der vorherigen Aufgabe erhalten.
 
 ## Umsetzung
-In Addition zur bereits erfüllten Aufgabe mittels eines manuellen Clients, würde noch ein automatischerClient erstellt, 
+In Addition zur bereits erfüllten Aufgabe mittels eines manuellen Clients, würde noch ein automatischer Client erstellt, 
 welche nach Auswahl des Modus einige Testfälle automatisch durchspielt. Dies soll zeigen, dass das Programm entsprechend
 der Aufgabenstellung funktioniert. Innerhalb dieser Dokumentation soll nun der automatische Client genauer beleuchtet 
 werden. Dafür werden die Dateien `test1.txt` und `test2.txt`, welche im Ordner "_Test Files_" gefunden werden können, 
@@ -13,6 +13,38 @@ beschrieben worden sind.
 
 ### Client.java
 
+```java
+case 2:
+    
+    System.out.println("*************************************************************************************");
+    System.out.println("ATTENTION: You have chosen mode 2! The automatic tests will start now...");
+
+    socket.setSoTimeout(timeout);
+
+    automaticParallelReadingFromSameFile();
+    automaticParallelReadFromDifferentFiles();
+    automaticParallelWritingInSameDocument();
+    automaticParallelWritingInDifferentDocument();
+    automaticParallelReadingAndWritingInSameDocument();
+    automaticParallelReadAndWriteInDifferentFiles();
+    automaticReadFromNonExistentFile();
+    automaticWriteInNonExistentFile();
+    automaticReadNonExistentLine();
+    automaticWriteNonExistentLine();
+    automaticOverwriteExistingLine();
+    automaticIncompleteReadCommand();
+    automaticIncompleteWriteCommand();
+    automaticImproperReadCommand();
+    automaticImproperWriteCommand();
+    automaticReadNegativeLine();
+    automaticWriteNegativeLine();
+    automaticUnknownCommand();
+    automaticMoreRequestsThanWorker();
+    
+    System.out.println("*************************************************************************************");
+    System.out.println("SUCCESS: All tests have passed! Exiting the client...");
+    break;
+```
 
 ## Beispiele
 

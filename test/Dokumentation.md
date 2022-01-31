@@ -1,9 +1,104 @@
 # Advanced IT - Testat 3
 ## Aufgabenstellung
+In dieser Aufgabe soll ein File-Server für Textdateien entwickelt werden.
+Vereinfachend gehen wir davon aus, dass dem Server ein festes, bereits existierendes Basisverzeichnis
+zugeordnet ist, in dem sich alle verwalteten Dateien befinden und dass er die notwendigen Zugriffsrechte
+besitzt. Die Textdateien sind dabei zeilenweise organisiert und beginnen mit Zeilennummer 1.
+Der Server soll als **Worker-Pool-Server** auf **Port 5999** Aufträge in Form von Strings mit `READ filename,line no` 
+entgegennehmen, wobei line no eine positive ganze Zahl sein muss. Daraufhin
+wird vom Server die Datei filename geöffnet, die Zeile line no ausgelesen und zurückgeschickt.
+Außerdem soll der Server auch das Kommando `WRITE filename,line no,data` verstehen, bei
+dem die Zeile line no durch data (kann Kommas und Leerzeichen enthalten) ersetzt werden soll.
+Falls sich im Basisverzeichnis des Servers keine solche Datei befindet oder keine entsprechende Zeile
+vorhanden ist, soll an den Client eine Fehlermeldung zurückgesendet werden.
 
+Achten Sie darauf, dass nebenläufige Zugriffe konsistente Dateien hinterlassen. Implementieren Sie hierzu
+das Zweite Leser-Schreiber-Problem (mit Schreiberpriorität) mit dem Java Monitorkonzept!
+
+Implementieren Sie den Server sowie einen kleinen Test-Client. Verwenden Sie Java und UDP!
+
+Testen Sie die Nebenläufigkeit und das Einhalten der Schreiberpriorität durch geeignete Szenarien und
+dokumentieren Sie die Testfälle!
 
 ## Umsetzung
+Um das Ganze etwas dynamischer zu gestalten, habe ich mir die Freiheit genommen, den Server so zu implementieren, dass
+er einen entsprechenden Ordner erstellt, wenn der Benötigte nicht auf dem Desktop vorhanden ist. Sollte diese
+Funktionalität nicht erwünscht sein, so lässt sich die **entsprechende Zeile (65 - 74)** aus dem Code der Klasse 
+`Server.java` entfernen. Die dann geworfene Fehlermeldung, sollte der Ordner fehlen, wird durch die Exceptions 
+abgefangen.
 
+Um den Anforderungen des **Worker-Pools** gerecht zu werden, werden durch den Server (`Server.java`) 5 Worker gestartet, 
+welche die eingehenden Aufträge bearbeiten sollen.
+
+**Server.java**
+```java
+for(int i = 0; i < workers.length; i++) {
+    workers[i] = new Worker(i + 1, serverSocket, requestQueue, monitor, PATH);
+    workers[i].start();
+    System.out.println("SUCCESS: Worker "+ (i + 1) +" was started!");
+}
+```
+
+In einer Endlosschleife fügt dabei der Server (`Server.java`) die eingehenden Aufträge der Clients zu einer 
+Job-Warteschlange hinzu, welche durch eine LinkedList (`Queue.java`) realisiert wurde.
+
+**Server.java**
+```java
+while (true) {
+    try {
+        dp = new DatagramPacket(new byte[MAXSIZE], MAXSIZE);
+        serverSocket.receive(dp);
+        requestQueue.add(dp);
+
+    } catch (Exception e) {
+        System.err.println("ERROR: " + e + "\nATTENTION: Shutting down server!");
+        System.exit(1);
+    }
+}
+```
+
+Ist ein Worker (`Worker.java`) bereit einen Auftrag zu bearbeiten, so holt er sich diesen aus der Job-Warteschlange, 
+bearbeitet diesen und sendet die Antwort zurück an den Auftragsgeber, also den Client (`Client.java`).
+
+**Worker.java**
+```java
+while (Server.running) {
+        DatagramPacket dp = q.remove();
+        System.out.println("SUCCESS: Worker " + this.id + " received the job from the queue!");
+
+        try {
+            InetAddress clientAddress = dp.getAddress();
+            int clientPort = dp.getPort();
+            String command = new String(dp.getData(), 0, dp.getLength());
+            String s = process(command);
+            DatagramPacket sendDp = new DatagramPacket(s.getBytes(), s.getBytes().length, clientAddress, clientPort);
+            socket.send(sendDp);
+            
+        } catch (Exception e) {
+            System.err.println("ERROR: " + e);
+        }
+}
+```
+
+Mit Hilfe eines File-Monitors (`FileMonitor.java`) für jedes File (verbunden über eine Map), wird sichergestellt, dass 
+kein Worker parallel zu einem anderen Worker eine Datei bearbeiten kann. Paralleles Lesen wird jedoch gewährleistet. 
+Solange ein Worker etwas aus einer Datei ausliest, darf jedoch nicht in diese geschrieben werden. Hierbei wurde 
+die Schreiber-Priorität implementiert.
+
+**FileMonitor.java**
+```java
+public synchronized void startRead() {
+
+    while ((activeW) || (anzWaitingW > 0)) {
+        try {
+            this.wait();
+        } catch (Exception e){
+            System.err.println("ERROR: " + e);
+        }
+    }
+    anzActiveR++;
+}
+```
 
 ## Beispiele
 Da das Prinzip des Beschreibens einer Datei sowie des Lesens aus ihr bereits aus der vorherigen Testataufgabe 
@@ -26,7 +121,11 @@ schreiben zu können. Existiert die zu beschreibende Datei noch nicht, so wird e
 Kleinschreibung, wie im Befehl angegeben, angelegt. Der Zugriff erfolgt jedoch "non case sensitive". Auf der anderen 
 Seite erfolgt das Schreiben der Daten in eine Datei immer "case sensitive".
 
-
+Durch die eigene Implementierung der File-Klasse `MyFile.java` ist die Benutzereingabe so konzipiert, dass der Benutzer
+nur den Namen der entsprechenden Datei eingeben muss. Innerhalb des Programms wird dann automatisch mit einer Text-Datei
+weitergearbeitet. Dies hat zur Folge, dass die `.bak-Datei` auch die entsprechende Endung der Datei `.txt` mitübernimmt,
+was jedoch rein technisch erstmal kein Problem darstellt. Dies ist wichtig für den Benutzer, da, wenn er nun eine 
+Eingabe mit der Dateiendung vornimmt, diese gedoppelt wird. Es ist vom Benutzer nut gefordert den **DATEINAMEN** anzugeben.
 
 Für das Durchspielen der verschiedenen Beispiele werden folgende Dateien mit dem entsprechenden Inhalt vorausgesetzt:
 
