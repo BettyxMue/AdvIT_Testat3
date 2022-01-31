@@ -116,25 +116,43 @@ public class Worker extends Thread {
                         if (param2[0].length() > 0) {
                             // Speicherung des Dateinamens durch Split des Befehls
                             fileName = param2[0].trim();
-                            // Speicherung der Zeilennummer durch Split des Befehls
-                            lineNo = Integer.parseInt(param2[1].trim());
-                            // Erstellung eines Files mit eingegebenen Namen und vorgegebenen Pfad
-                            f = new MyFile(path, fileName);
 
-                            // Überprüfung, ob für die entsprechende Datei ein Monitor bereits zugewiesen ist
-                            if (!monitor.containsKey(f)) {
-                                // wenn nicht, wird ein Monitor für diese Datei erstellt
-                                currentMonitor = new FileMonitor();
-                                monitor.put(f, currentMonitor);
+                            try {
+                                // Speicherung der Zeilennummer durch Split des Befehls
+                                lineNo = Integer.parseInt(param2[1].trim());
+
+                                // Überprüfung, ob eine positive Zahl < 0 als Zeilennummer angegeben wurde
+                                if (lineNo < 0){
+                                    answer = "ERROR: Bad line number input. Please choose a line number greater than 0.";
+
+                                } else {
+                                    // Erstellung eines Files mit eingegebenen Namen und vorgegebenen Pfad
+                                    f = new MyFile(path, fileName);
+
+                                    // Überprüfung, ob für die entsprechende Datei ein Monitor bereits zugewiesen ist
+                                    if (!monitor.containsKey(f)) {
+                                        // wenn nicht, wird ein Monitor für diese Datei erstellt
+                                        currentMonitor = new FileMonitor();
+                                        monitor.put(f, currentMonitor);
+                                    }
+                                    System.out.println("ATTENTION: Worker " + this.id + " starts reading...");
+
+                                    // lege den Thread schlafen, um Parallelität zeigen zu können
+                                    sleep(5000);
+
+                                    // Lesen des Inhalts der angefragten Zeile aus der entsprechenden Datei
+                                    answer = f.read(f, lineNo, monitor);
+                                    System.out.println("ATTENTION: Worker " + this.id + " stops reading...");
+                                }
+
+                            } catch (InterruptedException e) {
+                                // automatische Fehlermeldung für thread.sleep()
+                                throw new Exception(e);
+
+                            } catch (IllegalArgumentException e) {
+                                // Fehlermeldung, wenn der Benutzer keine Zahl als Zeilennummer angibt
+                                answer = "ERROR: Bad line number input. Line number has to be an integer number greater than 0.";
                             }
-
-                            // lege den Thread schlafen, um Parallelität zeigen zu können
-                            sleep(5000);
-
-                            System.out.println("ATTENTION: Worker " + this.id + " starts reading...");
-                            // Lesen des Inhalts der angefragten Zeile aus der entsprechenden Datei
-                            answer = f.read(f, lineNo, monitor);
-                            System.out.println("ATTENTION: Worker " + this.id + " stops reading...");
 
                         } else {
                             // Fehlermeldung, wenn der Benutzer keinen Dateinamen eingegeben hat
@@ -148,8 +166,7 @@ public class Worker extends Thread {
 
                 } catch (Exception e) {
                     // bei Auftreten einer Exception: Fehlerausgabe durch Weiterreichen der Exception
-                    answer = "ERROR: Something went wrong with the READ command!";
-                    throw new Exception(e);
+                    answer = "ERROR: " + e;
                 }
 
                 // Überprüfung, ob der Befehl das Wort "write" enthält
@@ -169,35 +186,53 @@ public class Worker extends Thread {
                         if (param2[0].length() > 0) {
                             // Speicherung des Dateinamens durch Split des Befehls
                             fileName = param2[0].trim();
-                            // Speicherung der Zeilennummer durch Split des Befehls
-                            lineNo = Integer.parseInt(param2[1].trim());
-                            // Speicherung des neuen Inhalts durch Split des Befehls
-                            newData = param2[2].trim();
-                            // Erstellung eines Files mit eingegebenen Namen und vorgegebenen Pfad
-                            f = new MyFile(path, fileName + ".txt");
 
-                            // Überprüfung, ob im angegebenen Pfad bereits eine Datei entsprechend des Datei-Objekts
-                            // existiert
-                            if (!f.exists()) {
-                                // wenn nicht, wird sie erstellt
-                                f.createNewFile();
-                                System.out.println("ATTENTION: No corresponding file could be found! Creating one...");
+                            try {
+                                // Speicherung der Zeilennummer durch Split des Befehls
+                                lineNo = Integer.parseInt(param2[1].trim());
+
+                                // Überprüfung, ob eine positive Zahl < 0 als Zeilennummer angegeben wurde
+                                if (lineNo < 0){
+                                    answer = "ERROR: Bad line number input. Please choose a line number greater than 0.";
+
+                                } else {
+                                    // Speicherung des neuen Inhalts durch Split des Befehls
+                                    newData = param2[2].trim();
+                                    // Erstellung eines Files mit eingegebenen Namen und vorgegebenen Pfad
+                                    f = new MyFile(path, fileName + ".txt");
+
+                                    // Überprüfung, ob im angegebenen Pfad bereits eine Datei entsprechend des Datei-Objekts
+                                    // existiert
+                                    if (!f.exists()) {
+                                        // wenn nicht, wird sie erstellt
+                                        f.createNewFile();
+                                        System.out.println("ATTENTION: No corresponding file could be found! Creating one...");
+                                    }
+
+                                    // Überprüfung, ob für die entsprechende Datei ein Monitor bereits zugewiesen ist
+                                    if (!monitor.containsKey(f)) {
+                                        // wenn nicht, wird ein Monitor für diese Datei erstellt
+                                        currentMonitor = new FileMonitor();
+                                        monitor.put(f, currentMonitor);
+                                    }
+
+                                    // lege den Thread schlafen, um Parallelität zeigen zu können
+                                    sleep(5000);
+
+                                    System.out.println("ATTENTION: Worker " + this.id + " starts writing...");
+                                    // Schreiben der eingegebenen Daten in die angegebenen Zeile der entsprechenden Datei
+                                    answer = f.write(f, lineNo, newData, monitor);
+                                    System.out.println("ATTENTION: Worker " + this.id + " stops writing...");
+                                }
+
+                            } catch (InterruptedException e) {
+                                // automatische Fehlermeldung für thread.sleep()
+                                throw new Exception(e);
+
+                            } catch (IllegalArgumentException e) {
+                                // Fehlermeldung, wenn der Benutzer keine Zahl als Zeilennummer angibt
+                                answer = "ERROR: Bad line number input. Line number has to be an integer number greater than 0.";
                             }
-
-                            // Überprüfung, ob für die entsprechende Datei ein Monitor bereits zugewiesen ist
-                            if (!monitor.containsKey(f)) {
-                                // wenn nicht, wird ein Monitor für diese Datei erstellt
-                                currentMonitor = new FileMonitor();
-                                monitor.put(f, currentMonitor);
-                            }
-
-                            // lege den Thread schlafen, um Parallelität zeigen zu können
-                            sleep(5000);
-
-                            System.out.println("ATTENTION: Worker " + this.id + " starts writing...");
-                            // Schreiben der eingegebenen Daten in die angegebenen Zeile der entsprechenden Datei
-                            answer = f.write(f, lineNo, newData, monitor);
-                            System.out.println("ATTENTION: Worker " + this.id + " stops writing...");
 
                         } else {
                             // Fehlermeldung, wenn der Benutzer keinen Dateinamen eingegeben hat
@@ -206,20 +241,18 @@ public class Worker extends Thread {
 
                     } else {
                         // Fehlermeldung, wenn der Benutzer einen benötigten Parameter nicht eingegeben hat
-                        answer = "ERROR: Invalid command. Please enter the missing parameters.";
+                        answer = "ERROR: Invalid command. Please enter the missing parameters in a correct format.";
                     }
 
                 } catch (Exception e) {
-                    // bei Auftreten einer Exception: Fehlerausgabe durch Weiterreichen der Exception
+                    // bei Auftreten einer Exception: Fehlerausgabe
                     answer = "ERROR: Something went wrong with the WRITE command!";
-                    throw new Exception(e);
                 }
 
             } else {
                 // wenn das eingegebene Kommando weder "READ" noch "WRITE" ist:
                 //      Fehlerausgabe durch Werfen einer Exception
                 answer = "ERROR: The given command is unknown!";
-                throw new Exception("Unknown Command");
             }
 
         } catch (Exception e) {

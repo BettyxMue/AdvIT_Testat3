@@ -67,7 +67,11 @@ public class MyFile extends File {
             // bei Auftreten einer FileNotFoundException: Fehlerausgabe
             return "ERROR: The corresponding file does not exists!";
 
-        }catch (Exception e) {
+        } catch (IOException e) {
+            // bei Auftreten einer IOException: Fehlerausgabe
+            System.err.println("ERROR: " + e);
+
+        } catch (Exception e) {
             // bei Auftreten einer Exception: Fehlerausgabe
             System.err.println("ERROR: " + e);
         }
@@ -125,25 +129,42 @@ public class MyFile extends File {
             // gesetzt --> setzt voraus, dass die gesuchte Zeile gefunden wurde
             answer = "ERROR; WRITE failed - line " + lineNo + " could not be found in file!";
             String s = "";
+            int i = 1;
 
             // Lese alle Zeilen, solange deren Inhalt nicht null wird
-            for (int i = 0; s != null; i++) {
+            while (i <= lineNo || s != null) {
                 // Setzen die Variable s auf den Inhalt der Zeile
                 s = inFile.readLine();
 
-                //
-                if (i == lineNo - 1) {
+                // Überprüfung, ob diese Iteration der Zeilennummer entspricht
+                if (i == lineNo) {
                     // setze die Variable "found" auf true, da die gesuchte Zeile gefunden wurde
                     found = true;
                     // schreibe die eingegebenen Daten des Benutzers in diese Zeile
                     outFile.println(data);
 
-                // Überprüfung, ob die Variable s nach der Iteration durch die Datei leer ist
-                } else if (s != null) {
-                    // wenn nicht, dann schreibe den Inhalt der Variable s wieder in diese Zeile (keine Änderung)
-                    outFile.println(s);
+                } else {
+                    //Überprüfung, ob die eingelesene Zeile null ist
+                    if (s == null) {
+                        // wenn ja, leere Zeilen mit leerem String füllen (nicht mit s, dann wird "null" reingeschrieben)
+                        outFile.println("");
+
+                    } else {
+                        // wenn nicht, den Inhalt der alten Zeile wieder übertragen
+                        outFile.println(s);
+                    }
                 }
+                // Inkrementieren der Zählervariable
+                i++;
             }
+
+        } catch (FileNotFoundException e) {
+            // bei Auftreten einer FileNotFoundException: Fehlerausgabe
+            return "ERROR: The corresponding file does not exists!";
+
+        } catch (IOException e) {
+            // bei Auftreten einer IOException: Fehlerausgabe
+            System.err.println("ERROR: " + e);
 
         } catch (Exception e) {
             // bei Auftreten einer Exception: Fehlerausgabe
@@ -184,7 +205,7 @@ public class MyFile extends File {
                 File f2 = new File(fileName + ".temp");
                 File f3 = new File(fileName + ".bak");
 
-                // Löschen und Umbennung der entsprechenden Dateien, um die Änderungen durchzuführen
+                // Löschen und Umbenennung der entsprechenden Dateien, um die Änderungen durchzuführen
                 f3.delete();
                 f1.renameTo(f3);
                 f2.renameTo(f1);
