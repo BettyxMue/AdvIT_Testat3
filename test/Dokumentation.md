@@ -552,14 +552,98 @@ SUCCESS: Worker 1 received the job from the queue!
 ### Beispiel 19: Mehr Befehle als Worker
 
 
-Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
+Client 1: Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
+*************************************************************************************
+> READ zahlen,1
+READ zahlen,2
+READ zahlen,3
+READ zahlen,4
+READ zahlen,5
+SUCCESS: Answer received: <doppel null>
+*************************************************************************************
+> SUCCESS: Answer received: < >
+*************************************************************************************
+> SUCCESS: Answer received: <dos>
+*************************************************************************************
+> SUCCESS: Answer received: <3>
+*************************************************************************************
+> SUCCESS: Answer received: <Vier>
+*************************************************************************************
+```
 
+Client 2: Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
+```java
+*************************************************************************************
+> READ zahlen,6
+READ zahlen,7
+READ zahlen,8
+READ zahlen,9
+READ zahlen,10
+SUCCESS: Answer received: <Fünf>
+*************************************************************************************
+> SUCCESS: Answer received: <Sechs>
+*************************************************************************************
+> SUCCESS: Answer received: <Sieben>
+*************************************************************************************
+> SUCCESS: Answer received: <Acht>
+*************************************************************************************
+> SUCCESS: Answer received: <Neun>
+*************************************************************************************
 ```
 
 Die Serverausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
-
+ATTENTION: Dispatcher added an element to queue. Size of queue: 1
+ATTENTION: Removing an element from queue. The new size of queue is: 0
+SUCCESS: Worker 1 received the job from the queue!
+ATTENTION: Worker 1 starts reading...
+ATTENTION: Dispatcher added an element to queue. Size of queue: 1
+ATTENTION: Removing an element from queue. The new size of queue is: 0
+SUCCESS: Worker 5 received the job from the queue!
+ATTENTION: Worker 5 starts reading...
+ATTENTION: Worker 1 stops reading...
+ATTENTION: Dispatcher added an element to queue. Size of queue: 1
+ATTENTION: Removing an element from queue. The new size of queue is: 0
+SUCCESS: Worker 2 received the job from the queue!
+ATTENTION: Worker 2 starts reading...
+ATTENTION: Worker 5 stops reading...
+ATTENTION: Dispatcher added an element to queue. Size of queue: 1
+ATTENTION: Removing an element from queue. The new size of queue is: 0
+SUCCESS: Worker 1 received the job from the queue!
+ATTENTION: Worker 1 starts reading...
+ATTENTION: Worker 2 stops reading...
+ATTENTION: Dispatcher added an element to queue. Size of queue: 1
+ATTENTION: Removing an element from queue. The new size of queue is: 0
+SUCCESS: Worker 5 received the job from the queue!
+ATTENTION: Worker 5 starts reading...
+ATTENTION: Worker 1 stops reading...
+ATTENTION: Dispatcher added an element to queue. Size of queue: 1
+ATTENTION: Removing an element from queue. The new size of queue is: 0
+SUCCESS: Worker 2 received the job from the queue!
+ATTENTION: Worker 2 starts reading...
+ATTENTION: Worker 5 stops reading...
+ATTENTION: Dispatcher added an element to queue. Size of queue: 1
+ATTENTION: Removing an element from queue. The new size of queue is: 0
+SUCCESS: Worker 1 received the job from the queue!
+ATTENTION: Worker 1 starts reading...
+ATTENTION: Worker 2 stops reading...
+ATTENTION: Dispatcher added an element to queue. Size of queue: 1
+ATTENTION: Removing an element from queue. The new size of queue is: 0
+SUCCESS: Worker 5 received the job from the queue!
+ATTENTION: Worker 5 starts reading...
+ATTENTION: Worker 1 stops reading...
+ATTENTION: Dispatcher added an element to queue. Size of queue: 1
+ATTENTION: Removing an element from queue. The new size of queue is: 0
+SUCCESS: Worker 2 received the job from the queue!
+ATTENTION: Worker 2 starts reading...
+ATTENTION: Worker 5 stops reading...
+ATTENTION: Dispatcher added an element to queue. Size of queue: 1
+ATTENTION: Removing an element from queue. The new size of queue is: 0
+SUCCESS: Worker 1 received the job from the queue!
+ATTENTION: Worker 1 starts reading...
+ATTENTION: Worker 2 stops reading...
+ATTENTION: Worker 1 stops reading...
 ```
 
 ### Beispiel 20: Befehl ohne gestarteten Server
@@ -591,17 +675,17 @@ Sonntag: Entenbraten
 
 **Zahlen.txt**
 ```java
-Null
-Eins
-Zwei
-Drei
+doppel null
+ 
+dos
+3
 Vier
 Fünf
 Sechs
 Sieben
 Acht
 Neun
-Zehn
+10
 Doppel Eins
 ...
 ```

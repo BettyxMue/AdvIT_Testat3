@@ -135,11 +135,11 @@ public class Worker extends Thread {
                                         currentMonitor = new FileMonitor();
                                         monitor.put(f, currentMonitor);
                                     }
+                                    System.out.println("ATTENTION: Worker " + this.id + " starts reading...");
 
                                     // lege den Thread schlafen, um Parallelität zeigen zu können
                                     sleep(5000);
 
-                                    System.out.println("ATTENTION: Worker " + this.id + " starts reading...");
                                     // Lesen des Inhalts der angefragten Zeile aus der entsprechenden Datei
                                     answer = f.read(f, lineNo, monitor);
                                     System.out.println("ATTENTION: Worker " + this.id + " stops reading...");
