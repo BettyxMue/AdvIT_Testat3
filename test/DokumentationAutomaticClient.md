@@ -47,6 +47,8 @@ case 2:
 ```
 
 ## Beispiele
+Für die folgenden Beispiele werden die folgenden 2 Text-Dateien vorausgesetzt bzw. verwendet. Diese können im Ordner 
+"_Test Files_" gefunden werden.
 
 **test1.txt**
 ```java
@@ -89,6 +91,9 @@ ATTENTION: You have chosen mode 2! The automatic tests will start now...
 *************************************************************************************
 ```
 
+Hierbei wird nur mit einem Client gearbeitet, der jedoch die Anfragen so übergibt, als würden mehrere Clients diese
+parallel an den Server senden. Hierbei findet keine Verzpögerung durch menschliches Handeln statt.
+
 Dabei wurde der Server entsprechend der folgenden Ausgabe gestartet:
 ```java
 SUCCESS: Server was startet on port 5999!
@@ -103,6 +108,10 @@ SUCCESS: Worker 5 was started!
 ATTENTION: Worker 4 is running...
 ATTENTION: Worker 5 is running...
 ```
+
+Da die Testfälle den Beispielen der "normalen" Dokumentation entsprechen, werde ich hier auf eine genauere 
+Beschreibung / Erklärung verzichten. Genauere Details zu den einzelnen Testfällen können bei den Beispielen in
+`Dokumentation.md` oder `Dokumentation.pdf` gefunden werden.
 
 ### Beispiel 1: Paralleles Lesen aus einer Datei
 
