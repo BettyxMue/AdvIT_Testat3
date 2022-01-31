@@ -166,6 +166,8 @@ Um die Parallelität in den eigenen Tests besser nachvollziehen zu können, schl
 ein Befehl ausführt für 5 Sekunden.
 
 Alle folgenden Beispiele finden mittels **Client-Modus 1** statt:
+
+**Client.java**
 ```java
 Available mode:
 1 - manual user input
@@ -180,6 +182,8 @@ Type a command to send:
 ```
 
 Dabei wurde der Server entsprechend der folgenden Ausgabe gestartet:
+
+**Server.java**
 ```java
 SUCCESS: Server was startet on port 5999!
 SUCCESS: Worker 1 was started!
@@ -680,7 +684,7 @@ Befehls entspricht. Der Benutzer bekommt dies als entsprechenden Fehler ausgegeb
 vornehmen.
 
 ### Beispiel 16: Lesen einer negativen Zeilennummer
-In diesem Beispiel soll aus eine negative Zeilennummer gelesen werden.
+In diesem Beispiel soll aus einer negative Zeilennummer gelesen werden.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java

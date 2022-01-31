@@ -11,8 +11,13 @@ vorausgesetzt. Der automatische Client funktioniert auch ohne diese, wird jedoch
 zurückgeben, da die automatisch erstellten Dateien leer sind, solange sie nicht durch die entsprechenden Kommandos 
 beschrieben worden sind.
 
-### Client.java
+Beim Start eines Clients wird der Benutzer aufgefordert den Modus zu wählen, welchen er benutzen möchte. Wählt er den
+Modus 2, so startet der automatische Client und `case 2` der Switch-Verzweigung wird ausgeführt. Dadurch durchläuft der 
+Client automatisch vorbereitete Testfälle / Methoden und gibt die dazugehörigen Ausgaben zurück. Diese können in den
+folgenden Beispielen gefunden werden. Am Ende benachrichtigt der Client den Benutzer, dass alle Tests vollständig 
+durchgeführt wurden und beendet sich daraufhin selbst.
 
+**Client.java**
 ```java
 case 2:
     
@@ -44,6 +49,23 @@ case 2:
     System.out.println("*************************************************************************************");
     System.out.println("SUCCESS: All tests have passed! Exiting the client...");
     break;
+```
+
+Der Server wird dabei ganz normal, wie auch beim manuellen Client gestartet.
+
+**Server.java**
+```java
+SUCCESS: Server was startet on port 5999!
+SUCCESS: Worker 1 was started!
+ATTENTION: Worker 1 is running...
+SUCCESS: Worker 2 was started!
+SUCCESS: Worker 3 was started!
+ATTENTION: Worker 2 is running...
+ATTENTION: Worker 3 is running...
+SUCCESS: Worker 4 was started!
+SUCCESS: Worker 5 was started!
+ATTENTION: Worker 4 is running...
+ATTENTION: Worker 5 is running...
 ```
 
 ## Beispiele
@@ -114,7 +136,7 @@ Beschreibung / Erklärung verzichten. Genauere Details zu den einzelnen Testfäl
 `Dokumentation.md` oder `Dokumentation.pdf` gefunden werden.
 
 ### Beispiel 1: Paralleles Lesen aus einer Datei
-
+In diesem Beispiel soll mit 2 Clients parallel aus einer Datei ausgelesen werden.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -134,7 +156,7 @@ SUCCESS: Answer received: <file.>
 ```
 
 ### Beispiel 2: Paralleles Lesen aus mehreren Dateien
-
+In diesem Beispiel soll mit 2 Clients parallel aus mehreren Dateien ausgelesen werden.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -150,7 +172,7 @@ SUCCESS: Answer received: <Hello!>
 ```
 
 ### Beispiel 3: Paralleles Schreiben in eine Datei
-
+In diesem Beispiel soll mit 2 Clients parallel in eine Datei geschrieben werden.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -164,7 +186,7 @@ SUCCESS: Answer received: <Overwritten to: I am tired...>
 ```
 
 ### Beispiel 4: Paralleles Schreiben in mehrere Dateien
-
+In diesem Beispiel soll mit 2 Clients parallel in mehrere Dateien geschrieben werden.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -178,7 +200,7 @@ SUCCESS: Answer received: <Overwritten to: Random Data>
 ```
 
 ### Beispiel 5: Paralleles Lesen und Schreiben in eine Datei
-
+In diesem Beispiel soll mit 2 Clients parallel in mehrere Dateien geschrieben werden.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -200,7 +222,7 @@ SUCCESS: Answer received: <SURPRISE in line 5>
 ```
 
 ### Beispiel 6: Paralleles Lesen und Schreiben in mehrere Dateien
-
+In diesem Beispiel soll mit 2 Clients aus mehreren Dateien gelesen und dabei gleichzeitig in mehrere Dateien geschrieben werden.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -218,7 +240,7 @@ SUCCESS: Answer received: <Overwritten to: Trying to access in parallel...>
 ```
 
 ### Beispiel 7: Lesen aus einer nicht vorhandenen Datei
-
+In diesem Beispiel soll aus einer nicht vorhandenen Datei gelesen werden.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -230,7 +252,7 @@ SUCCESS: Answer received: <ERROR: The corresponding file does not exists!>
 ```
 
 ### Beispiel 8: Schreiben in eine nicht vorhandene Datei
-
+n diesem Beispiel soll in eine noch nicht vorhandene Datei geschrieben werden.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -242,7 +264,7 @@ SUCCESS: Answer received: <Overwritten to: Will probably work...>
 ```
 
 ### Beispiel 9: Lesen einer nicht vorhandenen Zeile
-
+In diesem Beispiel soll eine noch nicht vorhandene Zeile gelesen werden.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -256,7 +278,7 @@ SUCCESS: Answer received: <ERROR: READ failed - line 30 could not be found in fi
 ```
 
 ### Beispiel 10: Beschreiben einer nicht vorhandene Zeile
-
+In diesem Beispiel soll eine noch nicht vorhandene Zeile einer Datei beschrieben werden.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -270,7 +292,7 @@ SUCCESS: Answer received: <Overwritten to: I am the last line>
 ```
 
 ### Beispiel 11: Überschreiben einer bereits vorhandenen Zeile
-
+In diesem Beispiel soll eine bereits vorhandene Zeile einer Datei überschrieben werden.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -284,7 +306,8 @@ SUCCESS: Answer received: <Overwritten to: HELLO!>
 ```
 
 ### Beispiel 12: Unvollständiger Lese-Befehl
-
+In diesem Beispiel soll getestet werden, wie das Programm mit einem unvollständigen Lese-Befehl umgeht. In diesem Fall 
+wird kein Dateiname mitgegeben, aus welchem gelesen werden soll.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -296,7 +319,8 @@ SUCCESS: Answer received: <ERROR: Invalid command. Please enter a valid filename
 ```
 
 ### Beispiel 13: Unvollständiger Schreib-Befehl
-
+In diesem Beispiel soll getestet werden, wie das Programm mit einem unvollständigen Schreib-Befehl umgeht. In diesem 
+Fall wird kein Dateiname mitgegeben, in welche geschrieben werden soll.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -308,7 +332,8 @@ SUCCESS: Answer received: <ERROR: Invalid command. Please enter a valid filename
 ```
 
 ### Beispiel 14: Unzulässiger Lese-Befehl
-
+In diesem Beispiel soll getestet werden, wie das Programm mit einem unzulässigen Lese-Befehl umgeht. In diesem Fall wird
+keine Integer als Zeilennummer angegeben.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -320,7 +345,8 @@ SUCCESS: Answer received: <ERROR: Bad line number input. Line number has to be a
 ```
 
 ### Beispiel 15: Unzulässiger Schreib-Befehl
-
+In diesem Beispiel soll getestet werden, wie das Programm mit einem unzulässigen Schreib-Befehl umgeht. In diesem Fall 
+wird keine Integer als Zeilennummer angegeben.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -332,7 +358,7 @@ SUCCESS: Answer received: <ERROR: Bad line number input. Line number has to be a
 ```
 
 ### Beispiel 16: Lesen einer negativen Zeilennummer
-
+In diesem Beispiel soll aus einer negative Zeilennummer gelesen werden.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -346,7 +372,7 @@ SUCCESS: Answer received: <ERROR: Bad line number input. Please choose a line nu
 ```
 
 ### Beispiel 17: Beschreiben einer negativen Zeilennummer
-
+In diesem Beispiel soll in eine negative Zeilennummer geschrieben werden.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -360,7 +386,7 @@ SUCCESS: Answer received: <ERROR: Bad line number input. Please choose a line nu
 ```
 
 ### Beispiel 18: Unbekannter Befehl
-
+In diesem Beispiel soll getestet werden, wie das Programm mit einem unbekannten Befehl umgeht.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -372,7 +398,7 @@ SUCCESS: Answer received: <ERROR: The given command is unknown!>
 ```
 
 ### Beispiel 19: Mehr Befehle als Worker
-
+In diesem Beispiel soll getestet werden, was passiert, wenn man mehr Befehle als Worker hat.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -411,7 +437,9 @@ Process finished with exit code 0
 ```
 
 ### Beispiel 20: Befehl ohne gestarteten Server
-
+In diesem Beispiel soll mit getestet werden, was passiert, wenn kein Server gestartet ist und somit der Client keine 
+Antwort erhält. Dieses Beispiel ist in den automatischen Testfällen nicht implementiert. Sollte jedoch versucht werden 
+diese ohne Server auszuführen, so tritt dieser Fall ein.
 
 Die Benutzereingabe/Clientausgabe für dieses Beispiel sieht wie folgt aus:
 ```java
@@ -433,7 +461,7 @@ ERROR: java.net.SocketTimeoutException: Receive timed out
 No connection to server available. The client will be closed now...
 ```
 
-## Auswertung
+## Gesamtauswertung
 Die passenden Ausgaben bzw. Fehlerausgaben zeigen, dass das Programm mit allen Eventualitäten klarkommt und somit die
 Aufgabe entsprechend der Anforderungen erfüllt wurde. Die Testdateien sollten am Ende des Durchlaufs wie folgt 
 aussehen:
