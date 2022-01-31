@@ -157,7 +157,12 @@ Doppel Eins
 ...
 ```
 
-Diese können im Ordner "_Test Files_" gefunden werden. Für individuelle Testfälle können aber natürlich auch andere Textdateien über _das Programm_ oder _manuell_ angelegt werden.
+Diese können im Ordner "_Test Files_" gefunden werden. Für individuelle Testfälle können aber natürlich auch andere 
+Textdateien über _das Programm_ oder _manuell_ angelegt werden. In den folgenden Testfällen werden diese Dateien 
+geändert. Mit den geänderten Daten wird dann auch in den folgenden Testfall weitergearbeitet.
+
+Um die Parallelität in den eigenen Tests besser nachvollziehen zu können, schläft jeder Worker / Thread, sobald er
+ein Befehl ausführt für 5 Sekunden.
 
 Alle folgenden Beispiele finden mittels **Client-Modus 1** statt:
 ```java
